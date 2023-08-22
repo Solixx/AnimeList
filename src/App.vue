@@ -12,6 +12,11 @@ const my_anime_asc = computed(() => {
 })
 
 const searchAnime = () => {
+  if(!query.value){
+    search_results.value = []
+    return
+  }
+
 	const url = `https://api.jikan.moe/v4/anime?q=${query.value}`
 	fetch(url)
 		.then(res => res.json())
@@ -27,18 +32,29 @@ const handleInput = (e) => {
 }
 
 const addAnime = (anime) => {
-	search_results.value = []
-	query.value = ''
+	const existingAnime = my_anime.value.find(item => item.id === anime.mal_id);
 
-	my_anime.value.push({
-		id: anime.mal_id,
-		title: anime.title,
-		image: anime.images.jpg.image_url,
-		total_episodes: anime.episodes,
-		watched_episodes: 0,
-	})
+  if (!existingAnime) {
+    my_anime.value.push({
+      id: anime.mal_id,
+      title: anime.title,
+      image: anime.images.jpg.image_url,
+      total_episodes: anime.episodes,
+      watched_episodes: 0,
+    });
 
-	localStorage.setItem('my_anime', JSON.stringify(my_anime.value))
+    localStorage.setItem('my_anime', JSON.stringify(my_anime.value));
+  }
+}
+
+const removeAnime = (anime) => {
+
+  const index = my_anime.value.findIndex(item => item.id === anime.id);
+
+  if (index !== -1) {
+    my_anime.value.splice(index, 1);
+    localStorage.setItem('my_anime', JSON.stringify(my_anime.value));
+  }
 }
 
 const increaseWatch = (anime) => {
@@ -85,12 +101,16 @@ onMounted(() => {
 				<h3>{{ anime.title }}</h3>
 				<div class="flex-1"></div>
 				<span class="episodes">{{ anime.watched_episodes }} / {{ anime.total_episodes }}</span>
-				<button 
-					v-if="anime.total_episodes !== anime.watched_episodes" 
+        <div class="anime-buttons">
+          <button 
+					v-if="(anime.total_episodes !== anime.watched_episodes) && (anime.total_episodes > 0)" 
 					@click="increaseWatch(anime)" class="button">+</button>
-				<button 
-					v-if="anime.watched_episodes > 0"
-					@click="decreaseWatch(anime)" class="button">-</button>
+          <button 
+            v-if="anime.watched_episodes > 0"
+            @click="decreaseWatch(anime)" class="button">-</button>
+          <button 
+            @click="removeAnime(anime)" class="button">X</button>
+        </div>
 			</div>
 		</div>
 	</main>
@@ -170,8 +190,6 @@ onMounted(() => {
     display: flex;
     margin: 1rem;
     padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
     transition: 0.4s;
   }
 
@@ -241,11 +259,13 @@ onMounted(() => {
     color: #888;
   }
 
-  .anime .button:first-of-type{
-    margin-right: 1rem;
+  .anime .anime-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
-  .anime .button:last-of-type{
-    margin-right: 0;
+  .anime .button{
+    margin-right: 0.5rem;
   }
 </style>
