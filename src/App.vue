@@ -69,7 +69,7 @@ const editMyScore = (anime, e) => {
 const editNumberWatch = (anime, e) => {
   if(e.target.value < 0)  anime.watched_episodes = 0
   else if(e.target.value >= anime.total_episodes) anime.watched_episodes = anime.total_episodes
-  else  anime.watched_episodes = e.target.value
+  else  anime.watched_episodes = Math.round(e.target.value)
   localStorage.setItem('my_anime', JSON.stringify(my_anime.value))
 }
 
