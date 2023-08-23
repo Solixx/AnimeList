@@ -57,6 +57,13 @@ const removeAnime = (anime) => {
   }
 }
 
+const editNumberWatch = (anime, e) => {
+  if(e.target.value < 0)  anime.watched_episodes = 0
+  else if(e.target.value >= anime.total_episodes) anime.watched_episodes = anime.total_episodes
+  else  anime.watched_episodes = e.target.value
+  localStorage.setItem('my_anime', JSON.stringify(my_anime.value))
+}
+
 const increaseWatch = (anime) => {
 	anime.watched_episodes++
 	localStorage.setItem('my_anime', JSON.stringify(my_anime.value))
@@ -100,7 +107,8 @@ onMounted(() => {
 				<img :src="anime.image" />
 				<h3>{{ anime.title }}</h3>
 				<div class="flex-1"></div>
-				<span class="episodes">{{ anime.watched_episodes }} / {{ anime.total_episodes }}</span>
+        <input type="number" v-model="anime.watched_episodes"  @blur="editNumberWatch(anime, $event)">
+				<span class="episodes"> / {{ anime.total_episodes }}</span>
         <div class="anime-buttons">
           <button 
 					v-if="(anime.total_episodes !== anime.watched_episodes) && (anime.total_episodes > 0)" 
@@ -257,6 +265,29 @@ onMounted(() => {
   .anime .episodes{
     margin-right: 1rem;
     color: #888;
+  }
+
+  .anime input{
+    margin-right: 5px;
+    appearance: none;
+    outline: none;
+    border: none;
+    background-color: white;
+    display: block;
+    color: #066fe7;
+    font-size: 1rem;
+    width: auto;
+    text-align: right;
+  }
+
+  .anime input:focus{
+    color: #888;
+  }
+
+  .anime input::-webkit-outer-spin-button,
+  .anime input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 
   .anime .anime-buttons{
