@@ -41,6 +41,8 @@ const addAnime = (anime) => {
       image: anime.images.jpg.image_url,
       total_episodes: anime.episodes,
       watched_episodes: 0,
+      score: anime.score,
+      myscore: 0,
     });
 
     localStorage.setItem('my_anime', JSON.stringify(my_anime.value));
@@ -55,6 +57,13 @@ const removeAnime = (anime) => {
     my_anime.value.splice(index, 1);
     localStorage.setItem('my_anime', JSON.stringify(my_anime.value));
   }
+}
+
+const editMyScore = (anime, e) => {
+  if(e.target.value < 0)  anime.myscore = 0
+  else if(e.target.value >= 10) anime.myscore = 10
+  else  anime.myscore = e.target.value
+  localStorage.setItem('my_anime', JSON.stringify(my_anime.value))
 }
 
 const editNumberWatch = (anime, e) => {
@@ -106,6 +115,8 @@ onMounted(() => {
 			<div v-for="anime in my_anime_asc" class="anime">
 				<img :src="anime.image" />
 				<h3>{{ anime.title }}</h3>
+        <input type="number" v-model="anime.myscore"  @blur="editMyScore(anime, $event)">
+        <span> / 10</span>
 				<div class="flex-1"></div>
         <input type="number" v-model="anime.watched_episodes"  @blur="editNumberWatch(anime, $event)">
 				<span class="episodes"> / {{ anime.total_episodes }}</span>
@@ -260,6 +271,8 @@ onMounted(() => {
   .anime h3{
     color: #888;
     font-size: 1.125rem;
+    width: auto;
+    max-width: 14rem;
   }
 
   .anime .episodes{
@@ -277,6 +290,7 @@ onMounted(() => {
     color: #066fe7;
     font-size: 1rem;
     width: auto;
+    max-width: 5rem;
     text-align: right;
   }
 
