@@ -128,91 +128,131 @@ onMounted(() => {
 			<div v-for="anime in my_anime_asc">
 				<div class="anime animeWatching" v-if="anime.status == 0">
 					<div class="changeStats" @click="changeStats(anime)"></div>
-					<img :src="anime.image" />
-					<h3>{{ anime.title }}</h3>
-					<input type="number" v-model="anime.myscore" @blur="editMyScore(anime, $event)" />
-					<span class="rate"> / 10</span>
-					<div class="flex-1"></div>
-					<input type="number" v-model="anime.watched_episodes" @blur="editNumberWatch(anime, $event)" />
-					<span class="episodes"> / {{ anime.total_episodes }}</span>
-					<div class="anime-buttons">
-						<button v-if="anime.total_episodes !== anime.watched_episodes &&
-							anime.total_episodes > 0
-							" @click="increaseWatch(anime)" class="button">
-							+
-						</button>
-						<button v-if="anime.watched_episodes > 0" @click="decreaseWatch(anime)" class="button">
-							-
-						</button>
-						<button @click="removeAnime(anime)" class="button">X</button>
+					<div class="grid">
+						<img :src="anime.image" class="c1" />
+						<h3 class="c2">{{ anime.title }}</h3>
+						<div class="c3">
+							<input type="number" v-model="anime.myscore" @blur="editMyScore(anime, $event)" />
+							<span class="rate"> / 10</span>
+						</div>
+						<div class="flex-1"></div>
+						<div class="c4">
+							<input type="number" v-model="anime.watched_episodes" @blur="editNumberWatch(anime, $event)" />
+							<span class="episodes"> / {{ anime.total_episodes }}</span>
+						</div>
+						<div class="c5">
+							<div class="anime-buttons">
+								<button v-if="anime.total_episodes !== anime.watched_episodes &&
+									anime.total_episodes > 0
+									" @click="increaseWatch(anime)" class="button">
+									+
+								</button>
+								<button v-if="anime.watched_episodes > 0" @click="decreaseWatch(anime)" class="button">
+									-
+								</button>
+								<button @click="removeAnime(anime)" class="button">X</button>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="anime animeCompleted" v-else-if="anime.status == 1">
 					<div class="changeStats" @click="changeStats(anime)"></div>
-					<img :src="anime.image" />
-					<h3>{{ anime.title }}</h3>
-					<input type="number" v-model="anime.myscore" @blur="editMyScore(anime, $event)" />
-					<span class="rate"> / 10</span>
-					<div class="flex-1"></div>
-					<input type="number" :value="anime.watched_episodes" disabled style="color: #888;" />
-					<span class="episodes"> / {{ anime.total_episodes }}</span>
-					<div class="anime-buttons">
-						<button @click="removeAnime(anime)" class="button">X</button>
+					<div class="grid">
+						<img :src="anime.image" class="c1" />
+						<h3 class="c2">{{ anime.title }}</h3>
+						<div class="c3">
+							<input type="number" v-model="anime.myscore" @blur="editMyScore(anime, $event)" />
+							<span class="rate"> / 10</span>
+						</div>
+						<div class="flex-1"></div>
+						<div class="c4">
+							<input type="number" :value="anime.watched_episodes" disabled style="color: #888;" />
+							<span class="episodes"> / {{ anime.total_episodes }}</span>
+						</div>
+						<div class="c5">
+							<div class="anime-buttons">
+								<button @click="removeAnime(anime)" class="button">X</button>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="anime animeOnhold" v-else-if="anime.status == 2">
 					<div class="changeStats" @click="changeStats(anime)"></div>
-					<img :src="anime.image" />
-					<h3>{{ anime.title }}</h3>
-					<input type="number" v-model="anime.myscore" @blur="editMyScore(anime, $event)" />
-					<span class="rate"> / 10</span>
-					<div class="flex-1"></div>
-					<input type="number" v-model="anime.watched_episodes" @blur="editNumberWatch(anime, $event)" />
-					<span class="episodes"> / {{ anime.total_episodes }}</span>
-					<div class="anime-buttons">
-						<button v-if="anime.total_episodes !== anime.watched_episodes &&
-							anime.total_episodes > 0
-							" @click="increaseWatch(anime)" class="button">
-							+
-						</button>
-						<button v-if="anime.watched_episodes > 0" @click="decreaseWatch(anime)" class="button">
-							-
-						</button>
-						<button @click="removeAnime(anime)" class="button">X</button>
+					<div class="grid">
+						<img :src="anime.image" class="c1" />
+						<h3 class="c2" >{{ anime.title }}</h3>
+						<div class="c3">
+							<input type="number" v-model="anime.myscore" @blur="editMyScore(anime, $event)" />
+							<span class="rate"> / 10</span>
+						</div>
+						<div class="flex-1"></div>
+						<div class="c4">
+							<input type="number" v-model="anime.watched_episodes" @blur="editNumberWatch(anime, $event)" />
+							<span class="episodes"> / {{ anime.total_episodes }}</span>
+						</div>
+						<div class="c5">
+							<div class="anime-buttons">
+								<button v-if="anime.total_episodes !== anime.watched_episodes &&
+									anime.total_episodes > 0
+									" @click="increaseWatch(anime)" class="button">
+									+
+								</button>
+								<button v-if="anime.watched_episodes > 0" @click="decreaseWatch(anime)" class="button">
+									-
+								</button>
+								<button @click="removeAnime(anime)" class="button">X</button>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="anime animeDropped" v-else-if="anime.status == 3">
 					<div class="changeStats" @click="changeStats(anime)"></div>
-					<img :src="anime.image" />
-					<h3>{{ anime.title }}</h3>
-					<input type="number" v-model="anime.myscore" @blur="editMyScore(anime, $event)" />
-					<span class="rate"> / 10</span>
-					<div class="flex-1"></div>
-					<input type="number" v-model="anime.watched_episodes" @blur="editNumberWatch(anime, $event)" />
-					<span class="episodes"> / {{ anime.total_episodes }}</span>
-					<div class="anime-buttons">
-						<button v-if="anime.total_episodes !== anime.watched_episodes &&
-							anime.total_episodes > 0
-							" @click="increaseWatch(anime)" class="button">
-							+
-						</button>
-						<button v-if="anime.watched_episodes > 0" @click="decreaseWatch(anime)" class="button">
-							-
-						</button>
-						<button @click="removeAnime(anime)" class="button">X</button>
+					<div class="grid">
+						<img :src="anime.image" class="c1"  />
+						<h3 class="c2">{{ anime.title }}</h3>
+						<div class="c3">
+							<input type="number" v-model="anime.myscore" @blur="editMyScore(anime, $event)" />
+							<span class="rate"> / 10</span>
+						</div>
+						<div class="flex-1"></div>
+						<div class="c4">
+							<input type="number" v-model="anime.watched_episodes" @blur="editNumberWatch(anime, $event)" />
+							<span class="episodes"> / {{ anime.total_episodes }}</span>
+						</div>
+						<div class="c5">
+							<div class="anime-buttons">
+								<button v-if="anime.total_episodes !== anime.watched_episodes &&
+									anime.total_episodes > 0
+									" @click="increaseWatch(anime)" class="button">
+									+
+								</button>
+								<button v-if="anime.watched_episodes > 0" @click="decreaseWatch(anime)" class="button">
+									-
+								</button>
+								<button @click="removeAnime(anime)" class="button">X</button>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="anime animePlantowatch" v-else>
 					<div class="changeStats" @click="changeStats(anime)"></div>
-					<img :src="anime.image" />
-					<h3>{{ anime.title }}</h3>
-					<input type="number" value="0" disabled style="color: #888;" />
-					<span class="rate"> / 10</span>
-					<div class="flex-1"></div>
-					<input type="number" value="0" disabled style="color: #888;" />
-					<span class="episodes"> / {{ anime.total_episodes }}</span>
-					<div class="anime-buttons">
-						<button @click="removeAnime(anime)" class="button">X</button>
+					<div class="grid">
+						<img :src="anime.image" class="c1" />
+						<h3 class="c2">{{ anime.title }}</h3>
+						<div class="c3">
+							<input type="number" value="0" disabled style="color: #888;" />
+							<span class="rate"> / 10</span>
+						</div>
+						<div class="flex-1"></div>
+						<div class="c4">
+							<input type="number" value="0" disabled style="color: #888;" />
+							<span class="episodes"> / {{ anime.total_episodes }}</span>
+						</div>
+						<div class="c5">
+							<div class="anime-buttons">
+								<button @click="removeAnime(anime)" class="button">X</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
