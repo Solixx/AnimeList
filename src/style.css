@@ -112,7 +112,10 @@ form input{
   margin-bottom: 1.5rem;
 }
 
-.myanime .anime{
+.myanime .animeWatching{
+  position: relative;
+  z-index: 1;
+
   display: flex;
   align-items: center;
   margin-bottom: 1.5rem;
@@ -120,6 +123,83 @@ form input{
   padding: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: inset 9px 0px 0px 0px rgba(7, 136, 18, 0.75);
+  -moz-box-shadow: inset 9px 0px 0px 0px rgba(7, 136, 18, 0.75);
+  box-shadow: inset 9px 0px 0px 0px rgba(7, 136, 18, 0.75);
+}
+
+.animeCompleted{
+  position: relative;
+  z-index: 1;
+  
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  background-color: #FFF;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: inset 9px 0px 0px 0px rgba(7, 31, 136, 0.75);
+  -moz-box-shadow: inset 9px 0px 0px 0px rgba(7, 31, 136, 0.75);
+  box-shadow: inset 9px 0px 0px 0px rgba(7, 31, 136, 0.75);
+}
+
+.animeOnhold{
+  position: relative;
+  z-index: 1;
+  
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  background-color: #FFF;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: inset 9px 0px 0px 0px rgba(180, 163, 12, 0.75);
+  -moz-box-shadow: inset 9px 0px 0px 0px rgba(180, 163, 12, 0.75);
+  box-shadow: inset 9px 0px 0px 0px rgba(180, 163, 12, 0.75);
+}
+
+.animeDropped{
+  position: relative;
+  z-index: 1;
+  
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  background-color: #FFF;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: inset 9px 0px 0px 0px rgba(146, 9, 9, 0.75);
+  -moz-box-shadow: inset 9px 0px 0px 0px rgba(146, 9, 9, 0.75);
+  box-shadow: inset 9px 0px 0px 0px rgba(146, 9, 9, 0.75);
+}
+
+.animePlantowatch{
+  position: relative;
+  z-index: 1;
+  
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  background-color: #FFF;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: inset 9px 0px 0px 0px rgba(78, 78, 78, 0.75);
+  -moz-box-shadow: inset 9px 0px 0px 0px rgba(78, 78, 78, 0.75);
+  box-shadow: inset 9px 0px 0px 0px rgba(78, 78, 78, 0.75);
+}
+
+.changeStats{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+
+  width: 15px;
+  height: 100%;
 }
 
 .anime img{
@@ -135,6 +215,11 @@ form input{
   font-size: 1.125rem;
   width: auto;
   max-width: 14rem;
+}
+
+.rate{
+  margin-right: 1rem;
+  color: #888;
 }
 
 .anime .episodes{
